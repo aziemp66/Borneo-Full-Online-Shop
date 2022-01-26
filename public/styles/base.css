@@ -4,4 +4,37 @@
 
 html {
     font-family: "Open Sans", sans-serif;
+
+    --color-gray-50: rgb(243, 236, 230);
+    --color-gray-100: rgb(207, 201, 195);
+    --color-gray-300: rgb(99, 92, 86);
+    --color-gray-400: rgb(70, 65, 60);
+    --color-gray-500: rgb(37, 34, 31);
+    --color-gray-600: rgb(32, 29, 26);
+    --color-gray-700: rgb(31, 26, 22);
+
+    --color-primary-50: #f9f871;
+    --color-primary-100: #c8f883;
+    --color-primary-200: #98f49c;
+    --color-primary-400: #6cecb6;
+    --color-primary-500: #46e3cc;
+    --color-primary-700: #35d7db;
+    --color-primary-200-contrast: #32a0eb;
+    --color-primary-500-contrast: rgb(255, 255, 255);
+
+    --color-error-100: rgb(255, 192, 180);
+    --color-error-500: rgb(199, 51, 15);
+
+    --color-primary-500-bg: #befcfd;
+
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+
+    --border-radius-small: 4px;
+    --border-radius-medium: 6px;
+
+    --shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
