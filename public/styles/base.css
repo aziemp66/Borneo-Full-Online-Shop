@@ -27,13 +27,13 @@ html {
     --color-primary-700: #c3073f;
 
     --color-gray-100: #4e4e50;
-    --color-gray-300: #2e2e31;
+    --color-gray-300: #262629;
     --color-gray-500: #1a1a1d;
 
     --color-error-100: rgb(255, 192, 180);
     --color-error-500: rgb(199, 51, 15);
 
-    --color-primary-500-bg: #befcfd;
+    --color-white-500: #e2dada;
 
     --space-1: 0.25rem;
     --space-2: 0.5rem;
