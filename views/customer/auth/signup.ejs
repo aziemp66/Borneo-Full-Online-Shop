@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <%- include("../includes/head", { pageTitle : "Signup" }) %>
+        <%- include("../../shared/includes/head", { pageTitle : "Signup" }) %>
         <link rel="stylesheet" href="/styles/forms.css" />
         <link rel="stylesheet" href="/styles/auth.css" />
     </head>
     <body>
-        <%- include("../includes/header") %>
+        <%- include("../../shared/includes/header") %>
         <main>
             <h1>Create New Account</h1>
             <form action="/signup" method="post">
@@ -77,6 +77,6 @@
                 <p id="switch-form"><a href="/login">Login Instead</a></p>
             </form>
         </main>
-        <%- include("../includes/footer") %>
+        <%- include("../../shared/includes/footer") %>
     </body>
 </html>

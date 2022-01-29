@@ -1,10 +1,12 @@
 const path = require("path");
+
 const express = require("express");
 const csrf = require("csurf");
 
 const db = require("./data/database");
-const authRoutes = require("./routes/auth.routes");
 const addCsrfTokenMiddleware = require("./middlewares/csrf-token");
+const errorHandlerMiddleware = require("./middlewares/error-handler");
+const authRoutes = require("./routes/auth.routes");
 
 const app = express();
 
@@ -20,11 +22,13 @@ app.use(addCsrfTokenMiddleware);
 
 app.use(authRoutes);
 
+app.use(errorHandlerMiddleware);
+
 db.connectToDatabase()
     .then(function () {
         app.listen(3000);
     })
     .catch(function (error) {
-        console.error("Failed to Connect to Database");
+        console.error("Failed to connect to the database!");
         console.error(error);
     });
