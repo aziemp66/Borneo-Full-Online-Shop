@@ -3,6 +3,7 @@ const mongoDbStore = require("connect-mongodb-session");
 
 function createSessionStore() {
     const MongoDbStore = mongoDbStore(expressSession);
+
     const store = new MongoDbStore({
         uri: "mongodb://localhost:27017",
         databaseName: "borneo-online-shop",
@@ -19,7 +20,7 @@ function createSessionConfig() {
         saveUninitialized: false,
         store: createSessionStore(),
         cookie: {
-            maxAge: 60 * 60 * 1000,
+            maxAge: 3 * 60 * 60 * 1000,
         },
     };
 }
