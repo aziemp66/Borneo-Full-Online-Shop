@@ -1,21 +1,23 @@
 const User = require("../models/user.model");
 const authUtil = require("../util/authentication");
 const validation = require("../util/validation");
+const sessionFlash = require("../util/session-flash");
 
 function getSignup(req, res) {
     res.render("customer/auth/signup");
 }
 
 async function signup(req, res, next) {
+    const enteredData = {
+        email: req.body.email,
+        password: req.body.password,
+        name: req.body.fullname,
+        street: req.body.street,
+        postal: req.body.postal,
+        city: req.body.city,
+    };
     if (
-        !validation.userDetailsAreValid(
-            req.body.email,
-            req.body.password,
-            req.body.fullname,
-            req.body.street,
-            req.body.postal,
-            req.body.city
-        ) ||
+        !validation.userDetailsAreValid(...enteredData) ||
         validation.emailAndPasswordIsConfirmed(
             req.body.email,
             req.body["confirm-email"],
@@ -23,7 +25,16 @@ async function signup(req, res, next) {
             req.body["confirm-password"]
         )
     ) {
-        res.redirect("/signup");
+        sessionFlash.flashDataToSession(
+            req,
+            {
+                errorMessage: "Please check your input for invalid data",
+                ...enteredData,
+            },
+            function () {
+                res.redirect("/signup");
+            }
+        );
         return;
     }
 
@@ -40,7 +51,13 @@ async function signup(req, res, next) {
         const existAlready = await user.existAlready();
 
         if (existAlready) {
-            res.redirect("/signup");
+            sessionFlash.flashDataToSession(req, {
+                errorMessage: "User Already Exist, Try logging in instead",
+                ...enteredData,
+                function() {
+                    res.redirect("/signup");
+                },
+            });
             return;
         }
 
@@ -57,6 +74,10 @@ function getLogin(req, res) {
 }
 
 async function login(req, res) {
+    const enteredData = {
+        email: req.body.email,
+        password: req.body.password,
+    };
     const user = new User(req.body.email, req.body.password);
     let existingUser;
     try {
@@ -65,8 +86,17 @@ async function login(req, res) {
         return next(error);
     }
 
+    const sessionErrorData = {
+        errorMessage:
+            "Invalid Credentials - please double-check your email and password!",
+        ...enteredData,
+    };
+
     if (!existingUser) {
-        res.redirect("/login");
+        sessionFlash.flashDataToSession(req, ...sessionErrorData, function () {
+            res.redirect("/login");
+        });
+
         return;
     }
 
@@ -75,7 +105,9 @@ async function login(req, res) {
     );
 
     if (!passwordIsCorrect) {
-        res.redirect("/login");
+        sessionFlash.flashDataToSession(req, ...sessionErrorData, function () {
+            res.redirect("/login");
+        });
         return;
     }
 
