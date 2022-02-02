@@ -18,13 +18,12 @@ class User {
         return db.getDb().collection("users").findOne({ email: this.email });
     }
 
-    async existAlready() {
+    existAlready() {
         const existingUser = this.getUserWithSameEmail();
         if (existingUser) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     async signup() {
