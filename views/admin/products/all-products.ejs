@@ -13,7 +13,14 @@
                 <p><a href="/admin/products/new" class="btn">Add Product</a></p>
             </section>
             <section>
-                <p>A list of Products</p>
+                <ul>
+                    <% for (const product of products) { %>
+                    <li>
+                        <!-- prettier-ignore -->
+                        <%- include("includes/product-item", { product :product }) %>
+                    </li>
+                    <% } %>
+                </ul>
             </section>
         </main>
         <%- include("../../shared/includes/footer") %>

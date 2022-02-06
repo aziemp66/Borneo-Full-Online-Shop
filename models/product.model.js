@@ -9,7 +9,23 @@ class Product {
         this.image = productData.image; //image file name
         this.imagePath = `product-data/images/${productData.image}`;
         this.imageUrl = `/products/assets/images/${productData.image}`;
+        if (productData._id) {
+            this.id = productData._id.toString();
+        }
     }
+
+    static async findAll() {
+        const products = await db
+            .getDb()
+            .collection("products")
+            .find()
+            .toArray();
+
+        return products.map(function (productDocument) {
+            return new Product(productDocument);
+        });
+    }
+
     async save() {
         const productData = {
             title: this.title,
