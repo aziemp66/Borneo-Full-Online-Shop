@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- prettier-ignore -->
+        <%- include("../../shared/includes/head", { pageTitle : "Add New Products"}) %>
+        <link rel="stylesheet" href="/styles/forms.css" />
+    </head>
+    <body>
+        <%- include("../../shared/includes/header") %>
+        <main>
+            <h1>Add new product</h1>
+            <form action="/admin/products/new" method="post">
+                <p>
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" required />
+                </p>
+                <p>
+                    <label for="image">Image</label>
+                    <input
+                        type="file"
+                        id="image"
+                        name="image"
+                        accept="image/png,image/jpg"
+                    />
+                </p>
+                <p>
+                    <label for="summary">Summary</label>
+                    <input
+                        type="text"
+                        id="summary"
+                        name="summary"
+                        required
+                        maxlength="250"
+                    />
+                </p>
+                <p>
+                    <label for="price">Price</label>
+                    <input
+                        type="number"
+                        id="price"
+                        name="price"
+                        min="0.01"
+                        required
+                        step="0.01"
+                    />
+                </p>
+                <p>
+                    <label for="description">Description</label>
+                    <textarea
+                        type="text"
+                        name="description"
+                        id="description"
+                        required
+                    ></textarea>
+                </p>
+                <p>
+                    <button type="reset" class="btn btn-alt">Reset</button>
+                    <button class="btn">Save</button>
+                </p>
+            </form>
+        </main>
+        <%- include("../../shared/includes/footer") %>
+    </body>
+</html>
