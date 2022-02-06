@@ -16,3 +16,6 @@ textarea {
     border: none;
     border-radius: var(--border-radius-medium);
 }
+textarea {
+    white-space: pre-wrap;
+}

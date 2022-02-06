@@ -4,7 +4,7 @@ class Product {
     constructor(productData) {
         this.title = productData.title;
         this.summary = productData.summary;
-        this.price = productData.price;
+        this.price = Number.parseFloat(productData.price);
         this.description = productData.description;
         this.image = productData.image; //image file name
         this.imagePath = `product-data/images/${productData.image}`;
@@ -19,7 +19,7 @@ class Product {
             image: this.image,
         };
 
-        db.getDb().collection("products").inserOne();
+        await db.getDb().collection("products").insertOne(productData);
     }
 }
 
