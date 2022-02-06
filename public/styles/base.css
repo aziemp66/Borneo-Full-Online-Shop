@@ -87,13 +87,16 @@ a {
     border-color: var(--color-primary-700);
 }
 
-.btn-alt {
+.btn-alt,
+.logout-btn {
     color: var(--color-primary-500);
     background-color: var(--color-gray-500);
 }
 
 .btn-alt:hover,
-.btn-alt:active {
+.btn-alt:active,
+.logout-btn:hover,
+.logout-btn:active {
     color: var(--color-primary-700);
     background-color: var(--color-gray-300);
 }

@@ -9,7 +9,11 @@
         <%- include("../../shared/includes/header") %>
         <main>
             <h1>Add new product</h1>
-            <form action="/admin/products/new" method="post">
+            <form
+                action="/admin/products?_csrf=<%= locals.csrfToken %>"
+                method="post"
+                enctype="multipart/form-data"
+            >
                 <p>
                     <label for="title">Title</label>
                     <input type="text" id="title" name="title" required />
