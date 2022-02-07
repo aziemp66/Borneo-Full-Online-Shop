@@ -30,14 +30,17 @@ const sessionConfig = createSessionConfig();
 app.use(expressSession(sessionConfig));
 app.use(csrf());
 
+//Adding middlewares
 app.use(addCsrfTokenMiddleware);
 app.use(checkAuthStatusMiddleware);
 
+//Routes
 app.use(baseRoutes);
 app.use(authRoutes);
 app.use(productsRoutes);
 app.use("/admin", adminRoutes);
 
+//Error Handler
 app.use(errorHandlerMiddleware);
 
 db.connectToDatabase()
