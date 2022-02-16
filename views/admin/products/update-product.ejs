@@ -8,14 +8,9 @@
     <body>
         <%- include("../../shared/includes/header") %>
         <main>
-            <h1>Add new product</h1>
+            <h1>Update Product</h1>
             <!-- prettier-ignore -->
-            <%- include("includes/product-form", {submitPath : "/admin/products", product:{ 
-                title : "",
-                summary : "",
-                price : "",
-                description : ""
-            }}) %>
+            <%- include("includes/product-form", {submitPath : "/admin/products/" + product.id, product : product}),  %>
         </main>
         <%- include("../../shared/includes/footer") %>
     </body>
