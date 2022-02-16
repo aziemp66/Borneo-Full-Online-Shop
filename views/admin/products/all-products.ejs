@@ -3,6 +3,7 @@
     <head>
         <!-- prettier-ignore -->
         <%- include("../../shared/includes/head", { pageTitle : "All Products"}) %>
+        <link rel="stylesheet" href="/styles/products.css" />
     </head>
     <body>
         <%- include("../../shared/includes/header") %>
@@ -13,7 +14,7 @@
                 <p><a href="/admin/products/new" class="btn">Add Product</a></p>
             </section>
             <section>
-                <ul>
+                <ul id="products-grid">
                     <% for (const product of products) { %>
                     <li>
                         <!-- prettier-ignore -->
