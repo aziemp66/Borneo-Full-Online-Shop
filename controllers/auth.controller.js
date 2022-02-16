@@ -148,7 +148,7 @@ async function login(req, res) {
     }
 
     authUtil.createUserSession(req, existingUser, function () {
-        res.redirect("/");
+        res.redirect("/admin/products");
     });
 }
 
