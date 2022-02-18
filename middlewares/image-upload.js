@@ -8,6 +8,14 @@ const upload = multer({
             cb(null, uuid() + "-" + file.originalname);
         },
     }),
+    /* storage : multer.diskStorage({
+        destination: function(req, file, cb) {
+            cb(null, 'product-data/images');
+        },
+        filename: function(req, file, cb) {
+            cb(null, uuid() + "-" + file.originalname);
+        }
+    }), */
 });
 
 const configuredMulterMiddleware = upload.single("image");

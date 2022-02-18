@@ -1,6 +1,6 @@
 <form
     action="<%= submitPath %>?_csrf=<%= locals.csrfToken %>"
-    method="post"
+    method="POST"
     enctype="multipart/form-data"
 >
     <p>
@@ -20,36 +20,43 @@
             id="image"
             name="image"
             accept="image/png,image/jpg"
-        />
+            <% if(imageRequired) { %>
+            required
+            <% } %>
     </p>
+
     <p>
         <label for="summary">Summary</label>
         <input
             type="text"
             id="summary"
             name="summary"
-            maxlength="250"
             value="<%= product.summary %>"
             required
+            maxlength="250"
         />
     </p>
+
     <p>
         <label for="price">Price</label>
         <input
             type="number"
             id="price"
             name="price"
+            value="<%= product.price %>"
             min="0.01"
             step="0.01"
-            value="<%= product.price %>"
             required
         />
     </p>
+
     <p>
         <label for="description">Description</label>
-        <!-- prettier-ignore -->
-        <textarea type="text" name="description" id="description" required><%= product.description %></textarea>
+        <textarea id="description" name="description" rows="7" required>
+<%= product.description %></textarea
+        >
     </p>
+
     <p>
         <button type="reset" class="btn btn-alt">Reset</button>
         <button class="btn">Save</button>
