@@ -13,18 +13,20 @@
             required
         />
     </p>
-    <p>
-        <label for="image">Image</label>
+    <div id="image-upload-control">
+        <p>
+            <label for="image">Image</label>
         <input
             type="file"
             id="image"
             name="image"
-            accept="image/png,image/jpg"
-            <% if(imageRequired) { %>
-            required
-            <% } %>
-    </p>
-
+            accept="image/*"
+            
+        />
+        </p>
+        
+        <img src="" alt="Selected image">
+    </div>
     <p>
         <label for="summary">Summary</label>
         <input
