@@ -19,7 +19,7 @@
                     <% for (const product of products) { %>
                     <li>
                         <!-- prettier-ignore -->
-                        <%- include("includes/product-item", { product :product }) %>
+                        <%- include("../../shared/includes/product-item.ejs", { product :product }) %>
                     </li>
                     <% } %>
                 </ul>
