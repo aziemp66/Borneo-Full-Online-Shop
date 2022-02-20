@@ -1,4 +1,5 @@
 const Product = require("../models/product.model");
+const productValidation = require("../util/product-validation");
 
 async function getProducts(req, res, next) {
     try {
@@ -19,6 +20,13 @@ async function createNewProduct(req, res, next) {
         ...req.body,
         image: req.file.filename,
     });
+
+    if (!productValidation.checkNewProductValidation(product)) {
+        const error = new Error("Invalid product data.");
+        error.status = 400;
+        next(error);
+        return;
+    }
 
     try {
         await product.save();
@@ -46,6 +54,13 @@ async function updateProduct(req, res, next) {
     if (req.file) {
         //replace the old image with the new one
         product.replaceImage(req.file.filename);
+    }
+
+    if (!productValidation.checkUpdateProductValidation(product)) {
+        const error = new Error("Invalid product data.");
+        error.status = 400;
+        next(error);
+        return;
     }
 
     try {
