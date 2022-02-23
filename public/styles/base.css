@@ -48,8 +48,8 @@ html {
 }
 
 body {
-    background-color: var(--color-white-500);
-    color: var(--color-primary-500);
+    background-color: var(--color-gray-500);
+    color: var(--color-white-500);
     margin: 0;
 }
 
