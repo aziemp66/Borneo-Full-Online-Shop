@@ -48,7 +48,7 @@ html {
 }
 
 body {
-    background-color: rgb(175, 110, 110);
+    background-color: var(--color-white-500);
     color: var(--color-primary-500);
     margin: 0;
 }

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- prettier-ignore -->
+        <%- include("../../shared/includes/head", { pageTitle : "Your Cart "}) %>
+        <link rel="stylesheet" href="/styles/cart.css" />
+    </head>
+    <body>
+        <%- include("../../shared/includes/header") %>
+        <main>
+            <h1>Your Cart</h1>
+            <ul id="cart-items">
+                <% for (const cartItem of locals.cart.items) { %>
+                <li>
+                    <!-- prettier-ignore -->
+
+                    <%- include("includes/cart-item.ejs", { item : cartItem }) %>
+                </li>
+                <% } %>
+            </ul>
+            <div id="cart-total">
+                <p>
+                    Total: $
+                    <span id="cart-total-price"
+                        ><%= locals.cart.totalPrice.toFixed(2) %></span
+                    >
+                </p>
+
+                <button class="btn">Buy Products</button>
+            </div>
+        </main>
+        <%- include("../../shared/includes/footer") %>
+    </body>
+</html>
