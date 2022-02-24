@@ -27,7 +27,15 @@
                     >
                 </p>
 
-                <button class="btn">Buy Products</button>
+                <% if (locals.isAuth) { %>
+                <form action="/orders" method="POST">
+                    <button class="btn">Buy Products</button>
+                </form>
+                <% } else { %>
+                <p id="cart-total-fallback">
+                    Log in to proceed and purchase the items
+                </p>
+                <% } %>
             </div>
         </main>
         <%- include("../../shared/includes/footer") %>
