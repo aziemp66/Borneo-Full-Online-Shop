@@ -1,5 +1,5 @@
 const mongodb = require("mongodb");
-
+const productValidation = require("../util/product-validation");
 const db = require("../data/database");
 
 class Product {
@@ -80,6 +80,11 @@ class Product {
         };
 
         if (this.id) {
+            if (!productValidation.checkUpdateProductValidation(productData)) {
+                alert("Invalid product data");
+                return;
+            }
+
             const productId = new mongodb.ObjectId(this.id);
 
             if (!this.image) {
@@ -93,6 +98,10 @@ class Product {
                 }
             );
         } else {
+            if (!productValidation.checkNewProductValidation(productData)) {
+                alert("Invalid product data");
+                return;
+            }
             await db.getDb().collection("products").insertOne(productData);
         }
     }
