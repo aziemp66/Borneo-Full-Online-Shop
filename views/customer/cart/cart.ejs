@@ -29,6 +29,11 @@
 
                 <% if (locals.isAuth) { %>
                 <form action="/orders" method="POST">
+                    <input
+                        type="hidden"
+                        name="_csrf"
+                        value="<%= locals.csrfToken %>"
+                    />
                     <button class="btn">Buy Products</button>
                 </form>
                 <% } else { %>
