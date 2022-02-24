@@ -21,13 +21,6 @@ async function createNewProduct(req, res, next) {
         image: req.file.filename,
     });
 
-    if (!productValidation.checkNewProductValidation(product)) {
-        const error = new Error("Invalid product data.");
-        error.status = 400;
-        next(error);
-        return;
-    }
-
     try {
         await product.save();
     } catch (error) {
