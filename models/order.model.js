@@ -1,4 +1,5 @@
 const db = require("../data/database");
+const mongodb = require("mongodb");
 
 class Order {
     //Status => pending,fullfilled,cancelled
@@ -17,9 +18,65 @@ class Order {
         }
         this.id = orderId;
     }
+
+    static transformOrderDocument(orderDoc) {
+        return new Order(
+            orderDoc.productData,
+            orderDoc.userData,
+            orderDoc.status,
+            orderDoc.date,
+            orderDoc._id
+        );
+    }
+
+    static transformOrderDocuments(orderDocs) {
+        return orderDocs.map(this.transformOrderDocument);
+    }
+
+    static async findAllForUser(userId) {
+        const uid = new mongodb.ObjectId(userId);
+        const orderDocs = await db
+            .getDb()
+            .collection("orders")
+            .find({ "userData._id": uid })
+            .sort({ _id: -1 })
+            .toArray();
+        return this.transformOrderDocuments(orderDocs);
+    }
+
+    static async findAll() {
+        const orders = await db
+            .getDb()
+            .collection("orders")
+            .find({})
+            .sort({ _id: -1 })
+            .toArray();
+        return this.transformOrderDocuments(orders);
+    }
+
+    static async findById(orderId) {
+        const oid = new mongodb.ObjectId(orderId);
+        const orderDoc = await db
+            .getDb()
+            .collection("orders")
+            .findOne({ _id: oid });
+        return this.transformOrderDocument(orderDoc);
+    }
+
     save() {
         if (this.id) {
-            //Update
+            const orderId = new mongodb.ObjectId(this.id);
+            return db
+                .getDb()
+                .collection("orders")
+                .updateOne(
+                    { _id: orderId },
+                    {
+                        $set: {
+                            status: this.status,
+                        },
+                    }
+                );
         } else {
             const orderDocument = {
                 userData: this.userData,
