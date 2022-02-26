@@ -27,7 +27,7 @@
                     >
                 </p>
 
-                <% if (locals.isAuth) { %>
+                <% if (locals.isAuth && locals.cart.totalQuantity > 0) { %>
                 <form action="/orders" method="POST">
                     <input
                         type="hidden"
@@ -38,7 +38,8 @@
                 </form>
                 <% } else { %>
                 <p id="cart-total-fallback">
-                    Log in to proceed and purchase the items
+                    Log in and add items to the cart to proceed and purchase the
+                    items
                 </p>
                 <% } %>
             </div>
