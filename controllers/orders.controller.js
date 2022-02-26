@@ -34,6 +34,14 @@ async function addOrder(req, res, next) {
 
     req.session.cart = null;
 
+    let successUrl = "http://localhost:3000/orders/success";
+    let failureUrl = "http://localhost:3000/orders/failure";
+
+    if (process.env.PORT) {
+        successUrl = "https://borneo-online-shop.herokuapp.com/orders/success";
+        failureUrl = "https://borneo-online-shop.herokuapp.com/orders/failure";
+    }
+
     const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         line_items: cart.items.map((item) => {
@@ -49,8 +57,8 @@ async function addOrder(req, res, next) {
             };
         }),
         mode: "payment",
-        success_url: `http://localhost:3000/orders/success`,
-        cancel_url: `http://localhost:3000/orders/failure`,
+        success_url: successUrl,
+        cancel_url: failureUrl,
     });
 
     res.redirect(303, session.url);
