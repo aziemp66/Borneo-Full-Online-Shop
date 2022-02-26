@@ -4,8 +4,14 @@ const mongoDbStore = require("connect-mongodb-session");
 function createSessionStore() {
     const MongoDbStore = mongoDbStore(expressSession);
 
+    let mongodbUrl = "mongodb://localhost:27017";
+
+    if (process.env.MONGODB_URL) {
+        mongodbUrl = process.env.MONGODB_URL;
+    }
+
     const store = new MongoDbStore({
-        uri: "mongodb://localhost:27017",
+        uri: mongodbUrl,
         databaseName: "borneo-online-shop",
         collection: "sessions",
     });
