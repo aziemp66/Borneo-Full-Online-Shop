@@ -7,6 +7,12 @@ const expressSession = require("express-session");
 const db = require("./data/database");
 const createSessionConfig = require("./config/session");
 
+let PORT = 3000;
+
+if (process.env.PORT) {
+    PORT = process.env.PORT;
+}
+
 const addCsrfTokenMiddleware = require("./middlewares/csrf-token");
 const errorHandlerMiddleware = require("./middlewares/error-handler");
 const checkAuthStatusMiddleware = require("./middlewares/check-auth");
@@ -59,7 +65,7 @@ app.use(errorHandlerMiddleware);
 
 db.connectToDatabase()
     .then(function () {
-        app.listen(3000);
+        app.listen(PORT);
     })
     .catch(function (error) {
         console.error("Failed to connect to the database!");

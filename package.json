@@ -2,9 +2,13 @@
     "name": "borneo-online-shop",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "app.js",
+    "engines": {
+        "node": "16.x"
+    },
     "scripts": {
-        "start": "nodemon app.js"
+        "dev": "nodemon app.js",
+        "start": "node app.js"
     },
     "repository": {
         "type": "git",
